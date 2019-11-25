@@ -52,8 +52,12 @@ def main():
         last_chat_id = last_update['message']['chat']['id']
         last_chat_name = last_update['message']['chat']['first_name']
 
-        if last_chat_text.lower() == "/marks":
-            greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name) + ', твои оценки: quiz 1 - 5 \n quiz 2 - 3,3 \n quiz 1 - 9 \n control work - 7')
+         if last_chat_text.lower() == "/marks":
+            marks = get_marks("234")
+            marks_string = ""
+            for mark in marks:
+                marks_string += mark['task_name'] + " - " + mark['mark'] + '\n'
+            greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name) + ', твои оценки:\n' + marks_string)
         
         
         if last_chat_text.lower() in greetings and today == now.day and 6 <= hour < 12:
