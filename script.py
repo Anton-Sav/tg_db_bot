@@ -36,6 +36,13 @@ greet_bot = BotHandler(token)
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 now = datetime.datetime.now()
 
+def get_marks(self, user_id):
+        api_url = 'https://jacob.slezins.ru/methods/'
+        params = {'id_telegram' : user_id}
+        resp = requests.post(api_url, data=params)
+        result_json = resp.json()['response']
+        return result_json
+
 def main():  
     new_offset = None
     today = now.day
@@ -51,14 +58,14 @@ def main():
         last_chat_text = last_update['message']['text']
         last_chat_id = last_update['message']['chat']['id']
         last_chat_name = last_update['message']['chat']['first_name']
+        last_chat_user_id = last_update['message']['from']['id']
 
-         if last_chat_text.lower() == "/marks":
-            marks = get_marks("234")
-            marks_string = ""
+        if last_chat_text.lower() == "/marks":
+            marks = get_marks('234')
+            marks_string = ''
             for mark in marks:
-                marks_string += mark['task_name'] + " - " + mark['mark'] + '\n'
+                marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + '\n'
             greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name) + ', твои оценки:\n' + marks_string)
-        
         
         if last_chat_text.lower() in greetings and today == now.day and 6 <= hour < 12:
             greet_bot.send_message(last_chat_id, 'Доброе утро, {}'.format(last_chat_name))
