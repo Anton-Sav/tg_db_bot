@@ -39,7 +39,7 @@ now = datetime.datetime.now()
 def get_marks(self, user_id):
         api_url = 'https://jacob.slezins.ru/methods/'
         params = {'id_telegram' : user_id}
-        resp = requests.post(api_url, data=params)
+        resp = requests.get(api_url)
         result_json = resp.json()['response']
         return result_json
 
