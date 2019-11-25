@@ -37,7 +37,7 @@ greetings = ('здравствуй', 'привет', 'ку', 'здорово')
 now = datetime.datetime.now()
 
 def get_marks(self, user_id):
-        api_url = 'https://jacob.slezins.ru/methods/'
+        api_url = 'http://requestbin.net/r/18hnsg51'
         params = {'id_telegram' : user_id}
         resp = requests.get(api_url)
         result_json = resp.json()['response']
