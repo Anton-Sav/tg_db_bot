@@ -36,10 +36,10 @@ greet_bot = BotHandler(token)
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 now = datetime.datetime.now()
 
-def get_marks(self, user_id):
-        api_url = 'http://requestbin.net/r/18hnsg51'
+def get_marks(user_id):
+        api_url = 'http://jacob.slezins.ru/methods/'
         params = {'id_telegram' : user_id}
-        resp = requests.get(api_url)
+        resp = requests.post(api_url, data = params)
         result_json = resp.json()['response']
         return result_json
 
