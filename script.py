@@ -38,8 +38,8 @@ now = datetime.datetime.now()
 
 def get_marks(user_id):
         api_url = 'http://jacob.slezins.ru/methods/index.php'
-        params = {'id_telegram' : user_id}
-        resp = requests.post(api_url, data = params)
+        params = {'id_telegram' : '234'}
+        resp = requests.get(api_url, params)
         result_json = resp.json()['response']
         return result_json
 
