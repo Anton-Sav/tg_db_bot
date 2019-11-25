@@ -61,10 +61,10 @@ def main():
         last_chat_user_id = last_update['message']['from']['id']
 
         if last_chat_text.lower() == "/marks":
-            marks = get_marks('234')
-            marks_string = marks
-#             for mark in marks:
-#                 marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + '\n'
+            marks = get_marks('234')['marks']
+            marks_string = ''
+            for mark in marks:
+                marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + '\n'
             greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name) + ', твои оценки:\n' + marks_string)
         
         if last_chat_text.lower() in greetings and today == now.day and 6 <= hour < 12:
