@@ -41,14 +41,14 @@ def registration(user_id, full_name):
         api_url = 'http://jacob.slezins.ru/methods/index.php'
         params = {'id_telegram' : user_id, 'fullname' : full_name, 'token' : token1}
         resp = requests.get(api_url, params)
-        result_json = resp.json()['code']
+        result_json = resp.getcode()
         return result_json
     
 def signUp(user_id):
         api_url = 'http://jacob.slezins.ru/methods/index.php'
         params = {'id_telegram' : user_id, 'token' : token1}
         resp = requests.get(api_url, params)
-        result_json = resp.json()['code']
+        result_json = resp.getcode()
         return result_json
     
 def get_marks(user_id):
@@ -91,7 +91,7 @@ def main():
                 flag_registration = False
         
         if last_chat_text == "/signUp":
-            code = signUp(last_chat_user_id)
+            code = signUp(last_chat_user_id)s
             if code == 401:
                 greet_bot.send_message(last_chat_id, 'Введите ФИО в формате:\nФамилия Имя Отчество')
                 flag_registration = True
