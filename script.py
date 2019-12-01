@@ -91,7 +91,7 @@ def main():
                 greet_bot.send_message(last_chat_id, 'Ошибка сервера, введите /sighUp, чтобы повторить')
                 flag_registration = False
         
-        if last_chat_text == "/signUp":
+        if last_chat_text == "/signup":
             code = signUp(last_chat_user_id)
             if code == 401:
                 greet_bot.send_message(last_chat_id, 'Введите ФИО в формате:\nФамилия Имя Отчество')
