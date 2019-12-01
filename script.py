@@ -36,18 +36,18 @@ greet_bot = BotHandler(token)
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 now = datetime.datetime.now()
 
-def check_reg(user_id):
+def registration(user_id, full_name):
         api_url = 'http://jacob.slezins.ru/methods/index.php'
         params = {'id_telegram' : user_id}
         resp = requests.get(api_url, params)
-        result_json = resp.json()
+        result_json = resp.json()['code']
         return result_json
     
-def start(user_id, full_name):
+def signUp(user_id):
         api_url = 'http://jacob.slezins.ru/methods/index.php'
         params = {'id_telegram' : user_id}
         resp = requests.get(api_url, params)
-        result_json = resp.json()
+        result_json = resp.json()['code']
         return result_json
     
 def get_marks(user_id):
@@ -78,7 +78,7 @@ def main():
         last_chat_user_id = last_update['message']['from']['id']
         
         if flag_registration == True:
-            code = start(last_chat_user_id, last_chat_text)['code']
+            code = registration(last_chat_user_id, last_chat_text)
             if code == 200:
                 greet_bot.send_message(last_chat_id, 'Регистрация прошла успешно')
                 flag_registration = False
@@ -89,16 +89,16 @@ def main():
                 greet_bot.send_message(last_chat_id, 'Ошибка сервера, введите /sighUp, чтобы повторить')
                 flag_registration = False
         
-        if last_chat_text.lower() == "/start":
-            code = check_reg(last_chat_user_id)['code']
-            if code == 401:
-                greet_bot.send_message(last_chat_id, 'Введите ФИО в формате:\nФамилия Имя Отчество')
-                flag_registration = True
-            else:
-                greet_bot.send_message(last_chat_id, 'Вы уже зарегистрированы')
+#         if last_chat_text.lower() == "/start":
+#             code = check_reg(last_chat_user_id)
+#             if code == 401:
+#                 greet_bot.send_message(last_chat_id, 'Введите ФИО в формате:\nФамилия Имя Отчество')
+#                 flag_registration = True
+#             else:
+#                 greet_bot.send_message(last_chat_id, 'Вы уже зарегистрированы')
         
         if last_chat_text.lower() == "/signUp":
-            code = get_marks(last_chat_user_id)['code']
+            code = signUp(last_chat_user_id)['code']
             if code == 401:
                 greet_bot.send_message(last_chat_id, 'Введите ФИО в формате:\nФамилия Имя Отчество')
                 flag_registration = True
@@ -108,7 +108,6 @@ def main():
                 
         if last_chat_text.lower() == "/marks":
             marks = get_marks(last_chat_user_id)['marks']
-            marks_string = ''
             for mark in marks:
                 marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + '\n'
             greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name) + ', твои оценки:\n' + marks_string)
