@@ -107,12 +107,12 @@ def main():
                 greet_bot.send_message(last_chat_id, 'Вы уже зарегистрированы')
                 
         if last_chat_text.lower() == "/formula":
-            greet_bot.sendPhoto(last_chat_id, "url")
+            greet_bot.send_photo(last_chat_id, "url")
             
                 
         if last_chat_text.lower() == "/marks":
             if registration_flag == False:
-                greet_bot.send_message(last_chat_id, 'Вы не зарегистрированы, введите /signup, чтобы пройти регистрацию')
+                greet_bot.send_message(last_chat_id, 'Вы не зарегистрированы, введите  /signup, чтобы пройти регистрацию')
             else:
                 marks = get_marks(last_chat_user_id)['marks']
                 marks_string = ""
