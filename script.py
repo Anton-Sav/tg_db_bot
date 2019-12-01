@@ -84,6 +84,8 @@ def main():
         last_chat_name = last_update['message']['chat']['first_name']
         last_chat_user_id = last_update['message']['from']['id']
         
+        
+        
         if flag_registration == True:
             code = registration(last_chat_user_id, last_chat_text)
             if code == 200:
