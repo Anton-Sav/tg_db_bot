@@ -35,24 +35,25 @@ token = "967673574:AAGhnK76sG-yssLonUS6rVIKJCv-XeB8SKE"
 greet_bot = BotHandler(token)  
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 now = datetime.datetime.now()
+token = "c8aadb552db2d2c75bc938bd266daeea1f5262e25aaed8ba06895e2c427f4455"
 
 def registration(user_id, full_name):
         api_url = 'http://jacob.slezins.ru/methods/index.php'
-        params = {'id_telegram' : user_id}
+        params = {'id_telegram' : user_id, 'fullname' : full_name, 'token' : token}
         resp = requests.get(api_url, params)
         result_json = resp.json()['code']
         return result_json
     
 def signUp(user_id):
         api_url = 'http://jacob.slezins.ru/methods/index.php'
-        params = {'id_telegram' : user_id}
+        params = {'id_telegram' : user_id, 'token' : token}
         resp = requests.get(api_url, params)
         result_json = resp.json()['code']
         return result_json
     
 def get_marks(user_id):
         api_url = 'http://jacob.slezins.ru/methods/index.php'
-        params = {'id_telegram' : user_id}
+        params = {'id_telegram' : user_id, 'token' : token}
         resp = requests.get(api_url, params)
         result_json = resp.json()['response']
         return result_json
