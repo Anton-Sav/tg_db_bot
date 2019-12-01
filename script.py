@@ -20,7 +20,6 @@ class BotHandler:
         resp = requests.post(self.api_url + method, params)
         return resp
 
-
     def get_last_update(self):
         get_result = self.get_updates()
 
@@ -37,6 +36,20 @@ greet_bot = BotHandler(token)
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 now = datetime.datetime.now()
 
+def check_reg(user_id):
+        api_url = 'http://jacob.slezins.ru/methods/index.php'
+        params = {'id_telegram' : user_id}
+        resp = requests.get(api_url, params)
+        result_json = resp.json()
+        return result_json
+    
+def start(user_id, full_name):
+        api_url = 'http://jacob.slezins.ru/methods/index.php'
+        params = {'id_telegram' : user_id}
+        resp = requests.get(api_url, params)
+        result_json = resp.json()
+        return result_json
+    
 def get_marks(user_id):
         api_url = 'http://jacob.slezins.ru/methods/index.php'
         params = {'id_telegram' : user_id}
@@ -44,13 +57,6 @@ def get_marks(user_id):
         result_json = resp.json()['response']
         return result_json
     
-def start(user_id, full_name):
-        api_url = 'http://jacob.slezins.ru/methods/index.php'
-        params = {'id_telegram' : user_id}
-        resp = requests.get(api_url, params)
-        result_json = resp.json()['response']
-        return result_json
-
 def main():  
     new_offset = None
     today = now.day
@@ -84,7 +90,7 @@ def main():
                 flag_registration = False
         
         if last_chat_text.lower() == "/start":
-            code = get_marks(last_chat_user_id)['code']
+            code = check_reg(last_chat_user_id)['code']
             if code == 401:
                 greet_bot.send_message(last_chat_id, 'Введите ФИО в формате:\nФамилия Имя Отчество')
                 flag_registration = True
