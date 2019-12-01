@@ -55,7 +55,6 @@ def signUp(user_id):
         params = {'id_telegram' : user_id, 'token' : token1}
         resp = requests.get(api_url, params)
         result_json = resp.status_code
-        
         return result_json
     
 def get_marks(user_id):
@@ -102,8 +101,8 @@ def main():
             code = signUp(last_chat_user_id)
             if code == 401:
                 greet_bot.send_message(last_chat_id, 'Введите ФИО в формате:\nФамилия Имя Отчество')
-                flag_registration = True
             else:
+                registration_flag = True
                 greet_bot.send_message(last_chat_id, 'Вы уже зарегистрированы')
                 
         if last_chat_text.lower() == "/formula":
