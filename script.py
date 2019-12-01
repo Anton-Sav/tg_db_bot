@@ -78,11 +78,11 @@ def main():
             if code == 400:
                 greet_bot.send_message(last_chat_id, 'ФИО не найдены, введите /sighUp, чтобы повторить')
                 flag_registration = False
-            if code == 400:
+            if code == 500:
                 greet_bot.send_message(last_chat_id, 'Ошибка сервера, введите /sighUp, чтобы повторить')
                 flag_registration = False
         
-        if last_chat_text.lower() == "/start"
+        if last_chat_text.lower() == "/start":
             code = get_marks(last_chat_user_id)['code']
             if code == 401:
                 greet_bot.send_message(last_chat_id, 'Введите ФИО в формате:\nФамилия Имя Отчество')
@@ -90,7 +90,7 @@ def main():
             else:
                 greet_bot.send_message(last_chat_id, 'Вы уже зарегистрированы')
         
-        if last_chat_text.lower() == "/signUp"
+        if last_chat_text.lower() == "/signUp":
             code = get_marks(last_chat_user_id)['code']
             if code == 401:
                 greet_bot.send_message(last_chat_id, 'Введите ФИО в формате:\nФамилия Имя Отчество')
