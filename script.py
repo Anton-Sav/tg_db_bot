@@ -26,7 +26,6 @@ class BotHandler:
         resp = requests.post(self.api_url + method, params)
         return resp
 
-
     def get_last_update(self):
         get_result = self.get_updates()
 
@@ -110,10 +109,10 @@ def main():
                 greet_bot.send_message(last_chat_id, 'Успешно')
                 
         if last_chat_text.lower() == "/formula":
-            greet_bot.send_photo(last_chat_id, "https://sun9-58.userapi.com/c639630/v639630738/4a74b/1fxWsnO3jp0.jpg")
+            greet_bot.send_photo(last_chat_id, "https://github.com/Anton-Sav/tg_db_bot/blob/master/formula.png")
             
         if last_chat_text.lower() == "/deadline":
-            greet_bot.send_photo(last_chat_id, "https://jacob.slezins.ru/img/deadline.png")
+            greet_bot.send_photo(last_chat_id, "https://github.com/Anton-Sav/tg_db_bot/blob/master/deadlines.png")
             
         if last_chat_text.lower() == "/lecturer":
             greet_bot.send_message(last_chat_id, 'Alexander Breyman\nПочта: a@breyman.ru\nTelegramm - @abreyman')
