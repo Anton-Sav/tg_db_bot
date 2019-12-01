@@ -114,6 +114,7 @@ def main():
         if last_chat_text.lower() == "/deadline":
             greet_bot.send_photo(last_chat_id, "https://jacob.slezins.ru/img/deadline.png")
             
+
         if last_chat_text.lower() == "/lecturer":
             greet_bot.send_message(last_chat_id, 'Alexander Breyman\nПочта: a@breyman.ru\nTelegramm - @abreyman')
         
