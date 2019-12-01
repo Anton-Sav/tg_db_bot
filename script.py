@@ -21,7 +21,7 @@ class BotHandler:
         return resp
     
     def send_photo(self, chat_id, url):
-        params = {'chat_id': chat_id, 'photo': "https://sun9-58.userapi.com/c639630/v639630738/4a74b/1fxWsnO3jp0.jpg"}
+        params = {'chat_id': chat_id, 'photo': url}
         method = 'sendPhoto'
         resp = requests.post(self.api_url + method, params)
         return resp
@@ -106,11 +106,19 @@ def main():
                 flag_registration = True
             else:
                 registration_flag = True
-                greet_bot.send_message(last_chat_id, 'Вы уже зарегистрированы')
+                greet_bot.send_message(last_chat_id, 'Успешно')
                 
         if last_chat_text.lower() == "/formula":
-            greet_bot.send_photo(last_chat_id, "url")
+            greet_bot.send_photo(last_chat_id, "https://jacob.slezins.ru/img/formula.png")
             
+        if last_chat_text.lower() == "/deadline":
+            greet_bot.send_photo(last_chat_id, "https://jacob.slezins.ru/img/deadline.png")
+            
+        if last_chat_text.lower() == "/lecturer":
+            greet_bot.send_message(last_chat_id, 'Alexander Breyman\nПочта: a@breyman.ru\nTelegramm - @abreyman')
+        
+         if last_chat_text.lower() == "/materials":
+            greet_bot.send_message(last_chat_id, 'https://disk.yandex.ru/d/bfzNrWIOLulLXg')
                 
         if last_chat_text.lower() == "/marks":
             if registration_flag == False:
