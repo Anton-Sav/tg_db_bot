@@ -42,6 +42,7 @@ greet_bot = BotHandler(token)
 greetings = ('здравствуй', 'привет', 'ку', 'здорово')  
 now = datetime.datetime.now()
 token1 = "c8aadb552db2d2c75bc938bd266daeea1f5262e25aaed8ba06895e2c427f4455"
+registration = False
 
 def registration(user_id, full_name):
         api_url = 'http://jacob.slezins.ru/methods/index.php'
@@ -90,6 +91,7 @@ def main():
             if code == 200:
                 greet_bot.send_message(last_chat_id, 'Регистрация прошла успешно')
                 flag_registration = False
+                registration = True
             if code == 400:
                 greet_bot.send_message(last_chat_id, 'ФИО не найдены, введите /signup, чтобы повторить')
                 flag_registration = False
@@ -110,11 +112,14 @@ def main():
             
                 
         if last_chat_text.lower() == "/marks":
-            marks = get_marks(last_chat_user_id)['marks']
-            marks_string = ""
-            for mark in marks:
-                marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + '\n'
-            greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name) + ', твои оценки:\n' + marks_string)
+            if registration == False:
+                greet_bot.send_message(last_chat_id, 'Вы не зарегистрированы, введите /signup, чтобы пройти регистрацию')
+            else:
+                marks = get_marks(last_chat_user_id)['marks']
+                marks_string = ""
+                for mark in marks:
+                    marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + '\n'
+                greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name) + ', твои оценки:\n' + marks_string)
         
         if last_chat_text.lower() in greetings and today == now.day and 6 <= hour < 12:
             greet_bot.send_message(last_chat_id, 'Доброе утро, {}'.format(last_chat_name))
