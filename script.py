@@ -109,10 +109,10 @@ def main():
                 greet_bot.send_message(last_chat_id, 'Успешно')
                 
         if last_chat_text.lower() == "/formula":
-            greet_bot.send_photo(last_chat_id, "https://github.com/Anton-Sav/tg_db_bot/blob/master/formula.png")
+            greet_bot.send_photo(last_chat_id, "https://sun9-39.userapi.com/c857036/v857036039/8724/G92WKcAs-bc.jpg")
             
         if last_chat_text.lower() == "/deadline":
-            greet_bot.send_photo(last_chat_id, "https://github.com/Anton-Sav/tg_db_bot/blob/master/deadlines.png")
+            greet_bot.send_photo(last_chat_id, "https://sun9-53.userapi.com/c857036/v857036039/871c/cRI_d_fXcMQ.jpg")
             
         if last_chat_text.lower() == "/lecturer":
             greet_bot.send_message(last_chat_id, 'Alexander Breyman\nПочта: a@breyman.ru\nTelegramm - @abreyman')
