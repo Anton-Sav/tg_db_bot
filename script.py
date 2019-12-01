@@ -102,6 +102,7 @@ def main():
                 
         if last_chat_text.lower() == "/marks":
             marks = get_marks(last_chat_user_id)['marks']
+            marks_string = ""
             for mark in marks:
                 marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + '\n'
             greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name) + ', твои оценки:\n' + marks_string)
