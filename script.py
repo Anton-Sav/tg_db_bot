@@ -19,6 +19,12 @@ class BotHandler:
         method = 'sendMessage'
         resp = requests.post(self.api_url + method, params)
         return resp
+    
+    def send_photo(self, chat_id, url):
+        params = {'chat_id': chat_id, 'photo': "https://sun9-58.userapi.com/c639630/v639630738/4a74b/1fxWsnO3jp0.jpg"}
+        method = 'sendPhoto'
+        resp = requests.post(self.api_url + method, params)
+        return resp
 
     def get_last_update(self):
         get_result = self.get_updates()
@@ -85,20 +91,23 @@ def main():
                 greet_bot.send_message(last_chat_id, 'Регистрация прошла успешно')
                 flag_registration = False
             if code == 400:
-                greet_bot.send_message(last_chat_id, 'ФИО не найдены, введите /sighUp, чтобы повторить')
+                greet_bot.send_message(last_chat_id, 'ФИО не найдены, введите /signup, чтобы повторить')
                 flag_registration = False
             if code == 500:
-                greet_bot.send_message(last_chat_id, 'Ошибка сервера, введите /sighUp, чтобы повторить')
+                greet_bot.send_message(last_chat_id, 'Ошибка сервера, введите /signup, чтобы повторить')
                 flag_registration = False
         
-        if last_chat_text == "/signup":
+        if last_chat_text.lower() == "/signup":
             code = signUp(last_chat_user_id)
             if code == 401:
                 greet_bot.send_message(last_chat_id, 'Введите ФИО в формате:\nФамилия Имя Отчество')
                 flag_registration = True
             else:
                 greet_bot.send_message(last_chat_id, 'Вы уже зарегистрированы')
-
+                
+        if last_chat_text.lower() == "/formula":
+            greet_bot.sendPhoto(last_chat_id, "url")
+            
                 
         if last_chat_text.lower() == "/marks":
             marks = get_marks(last_chat_user_id)['marks']
