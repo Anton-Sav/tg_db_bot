@@ -26,6 +26,7 @@ class BotHandler:
         resp = requests.post(self.api_url + method, params)
         return resp
 
+
     def get_last_update(self):
         get_result = self.get_updates()
 
