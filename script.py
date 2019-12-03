@@ -133,7 +133,7 @@ def main():
             else:
                 data_json = get_marks(last_chat_user_id)
                 marks = data_json['marks']
-                marks_string = ""s
+                marks_string = ""
                 for mark in marks:
                     marks_string = marks_string + mark['task_name'] + ' - ' + str(mark['mark']) + " task weight: " + str(mark['weight']) + '\n'
                 marks_string = marks_string + "Total: " + str(data_json['total'])
