@@ -26,8 +26,6 @@ class BotHandler:
         resp = requests.post(self.api_url + method, params)
         return resp
 
-
-
     def get_last_update(self):
         get_result = self.get_updates()
 
@@ -46,21 +44,21 @@ now = datetime.datetime.now()
 token1 = "c8aadb552db2d2c75bc938bd266daeea1f5262e25aaed8ba06895e2c427f4455"
 
 def registration(user_id, full_name):
-        api_url = 'http://jacob.slezins.ru/methods/index.php'
+        api_url = 'http://db.jadill.ru/methods/index.php'
         params = {'id_telegram' : user_id, 'fullname' : full_name, 'token' : token1}
         resp = requests.get(api_url, params)
         result_json = resp.status_code
         return result_json
     
 def signUp(user_id):
-        api_url = 'http://jacob.slezins.ru/methods/index.php'
+        api_url = 'http://db.jadill.ru/methods/index.php'
         params = {'id_telegram' : user_id, 'token' : token1}
         resp = requests.get(api_url, params)
         result_json = resp.status_code
         return result_json
     
 def get_marks(user_id):
-        api_url = 'http://jacob.slezins.ru/methods/index.php'
+        api_url = 'http://db.jadill.ru/methods/index.php'
         params = {'id_telegram' : user_id, 'token' : token1}
         resp = requests.get(api_url, params)
         result_json = resp.json()['response']
@@ -110,6 +108,12 @@ def main():
                 registration_flag = True
                 greet_bot.send_message(last_chat_id, 'Успешно')
                 
+        if last_chat_text.lower() == "/start":
+            if registration_flag == False:
+                greet_bot.send_message(last_chat_id, 'Вы не зарегистрированы, введите  /signup, чтобы пройти регистрацию')
+            else:
+                greet_bot.send_message(last_chat_id, 'Успешно')
+                
         if last_chat_text.lower() == "/formula":
             greet_bot.send_photo(last_chat_id, "https://sun9-39.userapi.com/c857036/v857036039/8724/G92WKcAs-bc.jpg")
             
@@ -126,10 +130,12 @@ def main():
             if registration_flag == False:
                 greet_bot.send_message(last_chat_id, 'Вы не зарегистрированы, введите  /signup, чтобы пройти регистрацию')
             else:
-                marks = get_marks(last_chat_user_id)['marks']
+                data_json = get_marks(last_chat_user_id)
+                marks = data_json['marks']
                 marks_string = ""
                 for mark in marks:
-                    marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + '\n'
+                    marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + ' task weight: ' mark['weight'] + '\n'
+                marks_string += "Total: " + data_json['total']
                 greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name) + ', твои оценки:\n' + marks_string)
         
         if last_chat_text.lower() in greetings and today == now.day and 6 <= hour < 12:
