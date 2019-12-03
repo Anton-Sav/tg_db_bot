@@ -135,8 +135,8 @@ def main():
                 marks = data_json['marks']
                 marks_string = ""
                 for mark in marks:
-                    marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + ' task weight: ' mark['weight'] + '\n'
-                marks_string += "Total: " + data_json['total']
+                    marks_string = marks_string + mark['task_name'] + ' - ' + mark['mark'] + " task weight: " + mark['weight'] + '\n'
+                marks_string = marks_string + "Total: " + data_json['total']
                 greet_bot.send_message(last_chat_id, '{}'.format(last_chat_name) + ', твои оценки:\n' + marks_string)
         
         if last_chat_text.lower() in greetings and today == now.day and 6 <= hour < 12:
