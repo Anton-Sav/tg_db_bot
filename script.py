@@ -126,6 +126,7 @@ def main():
         if last_chat_text.lower() == "/materials":
             greet_bot.send_message(last_chat_id, 'https://disk.yandex.ru/d/bfzNrWIOLulLXg')
                 
+                
         if last_chat_text.lower() == "/marks":
             if registration_flag == False:
                 greet_bot.send_message(last_chat_id, 'Вы не зарегистрированы, введите  /signup, чтобы пройти регистрацию')
