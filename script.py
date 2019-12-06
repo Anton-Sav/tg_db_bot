@@ -108,11 +108,6 @@ def main():
                 registration_flag = True
                 greet_bot.send_message(last_chat_id, 'Успешно')
                 
-        if last_chat_text.lower() == "/start":
-            if registration_flag == False:
-                greet_bot.send_message(last_chat_id, 'Вы не зарегистрированы, введите  /signup, чтобы пройти регистрацию')
-            else:
-                greet_bot.send_message(last_chat_id, 'Успешно')
                 
         if last_chat_text.lower() == "/formula":
             greet_bot.send_photo(last_chat_id, "https://sun9-39.userapi.com/c857036/v857036039/8724/G92WKcAs-bc.jpg")
